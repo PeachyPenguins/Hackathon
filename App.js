@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
+import "react-native-gesture-handler";
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,13 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
+  Alert,
 } from "react-native";
 
 export default function App() {
+  const [userLocation, setUserLocation] = useState("");
   const rotateValueHolder = new Animated.Value(0);
   const imageUrl = "https://i.imgur.com/19aMNlB.png";
-  const changePages = () => {
-    console.log("CHANGING PAGES");
-  };
 
   const startImageRotate = () => {
     rotateValueHolder.setValue(0);
@@ -30,6 +29,18 @@ export default function App() {
     inputRange: [0, 1],
     outputRange: ["0deg", "360deg"],
   });
+
+  const findCoordinates = () => {
+    console.log("Props", props, "Navigating");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const location = JSON.stringify(position);
+        setUserLocation(location);
+      },
+      (error) => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -63,6 +74,8 @@ export default function App() {
   useEffect(() => {
     startImageRotate();
   }, []);
+
+  console.log("USER LOCATION", userLocation);
   return (
     <View style={styles.container}>
       <Animated.Image
@@ -74,7 +87,7 @@ export default function App() {
 
       <Text style={styles.header}>Welcome to Covid Analyzer</Text>
 
-      <TouchableOpacity style={styles.button} onPress={changePages}>
+      <TouchableOpacity style={styles.button} onPress={findCoordinates}>
         <Text style={styles.buttonText}>Explore</Text>
       </TouchableOpacity>
     </View>
