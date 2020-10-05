@@ -31,7 +31,7 @@ export default function App() {
   });
 
   const findCoordinates = () => {
-    console.log("Props", props, "Navigating");
+    // console.log("Props", props, "Navigating");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const location = JSON.stringify(position);
