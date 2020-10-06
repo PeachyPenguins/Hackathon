@@ -1,21 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import Home from "./components/Home";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+import thunk from "redux-thunk";
 
 export default function App() {
+  // Using thunk middleware for asynchronous calls
+  const middleware = [thunk];
+  const store = createStore(rootReducer, applyMiddleware(...middleware));
   return (
-    <View style={styles.container}>
-      <Text>Discord Notifications Work!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Home />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
