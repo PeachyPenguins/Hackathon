@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "react-native-gesture-handler";
 import {
   StyleSheet,
   Text,
@@ -10,9 +9,9 @@ import {
   Alert,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocation } from "../actions";
+import { setLocation, getData } from "../actions";
 
-export default function Home() {
+export default function Home({ navigation }) {
   // Redux Hooks
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
@@ -42,6 +41,7 @@ export default function Home() {
       (position) => {
         const location = JSON.stringify(position);
         dispatch(setLocation(location));
+        navigation.navigate("Dashboard", { name: "Dashboard" });
       },
       (error) => Alert.alert(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -79,10 +79,8 @@ export default function Home() {
 
   useEffect(() => {
     startImageRotate();
+    dispatch(getData());
   }, []);
-
-  // Redux global state from useSelector hook
-  console.log("GLOBAL STATE", state);
 
   return (
     <View style={styles.container}>
