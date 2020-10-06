@@ -19,7 +19,7 @@ const Dashboard = (props) => {
     item: {
       marginTop: 24,
       padding: 10,
-      backgroundColor: "pink",
+      backgroundColor: "grey",
       fontSize: 16,
     },
   });
