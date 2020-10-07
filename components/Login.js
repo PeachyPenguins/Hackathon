@@ -9,7 +9,7 @@ import FormButton from "./FormButton";
 // Firebase Import
 import firebase from "../firebase";
 
-export default function Home({ navigation }) {
+export default function Login({ navigation }) {
   // Redux Hooks
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", }}
         onSubmit={(values) => console.log(values)}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (

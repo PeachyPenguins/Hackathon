@@ -1,11 +1,11 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
-import Home from "./Home";
+import Login from "./Login";
 import Dashboard from "./Dashboard";
 
 const Navigator = createStackNavigator({
-  Home: { screen: Home },
+  Login: { screen: Login },
   Dashboard: { screen: Dashboard },
 });
 

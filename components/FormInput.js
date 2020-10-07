@@ -33,6 +33,7 @@ const FormInput = ({ value, onChangeText, onBlur, placeholder }) => (
       onChangeText={onChangeText}
       value={value}
       onBlur={onBlur}
+      selectionColor={'white'}
     />
   </View>
 );

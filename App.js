@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./components/Home";
+import Login from "./components/Login";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
@@ -24,8 +24,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Home"
-            component={Home}
+            name="Login"
+            component={Login}
             options={{ title: "Welcome" }}
           />
           <Stack.Screen name="Dashboard" component={Dashboard} />
