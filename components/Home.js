@@ -11,6 +11,9 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 
+// Firebase Import
+import firebase from "../firebase";
+
 export default function Home({ navigation }) {
   // Redux Hooks
   const state = useSelector((state) => state.state);
@@ -48,6 +51,9 @@ export default function Home({ navigation }) {
     );
   };
 
+  // Firebase Ref to database
+  const database = firebase.database().ref();
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -80,6 +86,11 @@ export default function Home({ navigation }) {
   useEffect(() => {
     startImageRotate();
     dispatch(getData());
+
+    // Firebase Listener on Component Mount
+    database.on("value", (snap) => {
+      console.log("FIREBASE", snap);
+    });
   }, []);
 
   return (
