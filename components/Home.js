@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Animated, Easing, Alert } from "react-native";
+import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
+import { Formik } from "formik";
+import FormInput from "./FormInput";
+import FormButton from "./FormButton";
 
 // Firebase Import
 import firebase from "../firebase";
-
-import FormInput from "./FormInput";
-import { Formik } from "formik";
-import FormButton from "./FormButton";
 
 export default function Home({ navigation }) {
   // Redux Hooks
@@ -18,31 +17,11 @@ export default function Home({ navigation }) {
   // Firebase Ref to database
   const database = firebase.database().ref();
 
-  const rotateValueHolder = new Animated.Value(0);
+  // const rotateValueHolder = new Animated.Value(0);
 
   const imageUrl = "https://i.imgur.com/19aMNlB.png";
 
-  const startImageRotate = () => {
-    rotateValueHolder.setValue(0);
-    Animated.timing(rotateValueHolder, {
-      toValue: 1,
-      duration: 8000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start(() => startImageRotate());
-  };
-
-  const rotation = rotateValueHolder.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
-  });
-
-  const handlePressed = () => {
-    navigation.navigate("Dashboard", { name: "Dashboard" });
-  };
-
   useEffect(() => {
-    startImageRotate();
     dispatch(getData());
 
     // Firebase Listener on Component Mount
@@ -55,16 +34,17 @@ export default function Home({ navigation }) {
     container: {
       flex: 1,
       backgroundColor: "#2BD1FB",
+    },
+    logo: {
+      marginBottom: "10%",
+      marginTop: "10%",
+      width: 150,
+      height: 150,
+    },
+    form: {
       alignItems: "center",
       justifyContent: "center",
     },
-    logo: {
-      marginBottom: 100,
-      width: 150,
-      height: 150,
-      transform: [{ rotate: rotation }],
-    },
-
     header: {
       fontSize: 30,
       textAlign: "center",
@@ -73,36 +53,34 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Animated.Image
-        style={styles.logo}
-        source={{
-          uri: imageUrl,
-        }}
-      />
-
-      {/* <Text style={styles.header}>Welcome to Covid Analyzer</Text> */}
-
-      <FormInput
-        name="email"
-        value={""}
-        placeholder="Email"
-        autoCapitalize="none"
-        // onChangeText={}
-        iconName="ios-mail"
-        iconColor="#2C384A"
-      />
-
-      <FormInput
-        name="password"
-        value={""}
-        placeholder="Password"
-        autoCapitalize="none"
-        // onChangeText={}
-        iconName="ios-mail"
-        iconColor="#2C384A"
-      />
-
-      <FormButton onPress={handlePressed}></FormButton>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => console.log(values)}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <View style={styles.form}>
+            <Animated.Image
+              style={styles.logo}
+              source={{
+                uri: imageUrl,
+              }}
+            />
+            <FormInput
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              placeholder="Email"
+            />
+            <FormInput
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              placeholder="Password"
+            />
+            <FormButton onPress={handleSubmit} />
+          </View>
+        )}
+      </Formik>
     </View>
   );
 }

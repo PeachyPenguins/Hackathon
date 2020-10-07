@@ -1,29 +1,17 @@
 import React from "react";
 import { StyleSheet, View, TextInput } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-
-const FormInput = ({ placeholder, value }) => (
-  <View style={styles.inputContainer}>
-    <TextInput
-      style={styles.input}
-      underlineColorAndroid="transparent"
-      placeholder={placeholder}
-      placeholderTextColor="#e05e78"
-      autoCapitalize="none"
-      //  onChangeText = {this.handleEmail}
-    />
-  </View>
-);
 
 const styles = StyleSheet.create({
   inputContainer: {
     width: "80%",
     backgroundColor: "#465881",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
+    borderRadius: 5,
+    height: "11%",
+    marginBottom: 15,
     justifyContent: "center",
     padding: 20,
+    opacity: 0.8,
+    borderWidth: 0
   },
   iconStyle: {
     marginRight: 10,
@@ -33,5 +21,20 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
+const FormInput = ({ value, onChangeText, onBlur, placeholder }) => (
+  <View style={styles.inputContainer}>
+    <TextInput
+      style={styles.input}
+      underlineColorAndroid="transparent"
+      placeholder={placeholder}
+      placeholderTextColor="white"
+      autoCapitalize="none"
+      onChangeText={onChangeText}
+      value={value}
+      onBlur={onBlur}
+    />
+  </View>
+);
 
 export default FormInput;
