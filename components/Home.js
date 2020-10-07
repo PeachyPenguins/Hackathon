@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, Animated, Easing, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 
 // Firebase Import
 import firebase from "../firebase";
 
+import FormInput from "./FormInput";
+import { Formik } from "formik";
+import FormButton from "./FormButton";
+
 export default function Home({ navigation }) {
   // Redux Hooks
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
+
+  // Firebase Ref to database
+  const database = firebase.database().ref();
 
   const rotateValueHolder = new Animated.Value(0);
 
@@ -38,50 +37,9 @@ export default function Home({ navigation }) {
     outputRange: ["0deg", "360deg"],
   });
 
-  const findCoordinates = () => {
-    // Requests user for permission to retrieve location, then retrieves location
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const location = JSON.stringify(position);
-        dispatch(setLocation(location));
-        navigation.navigate("Dashboard", { name: "Dashboard" });
-      },
-      (error) => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+  const handlePressed = () => {
+    navigation.navigate("Dashboard", { name: "Dashboard" });
   };
-
-  // Firebase Ref to database
-  const database = firebase.database().ref();
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#2BD1FB",
-      alignItems: "center",
-      justifyContent: "space-around",
-    },
-    logo: {
-      width: 200,
-      height: 200,
-      transform: [{ rotate: rotation }],
-    },
-    button: {
-      alignItems: "center",
-      backgroundColor: "#282C34",
-      paddingTop: 10,
-      paddingBottom: 10,
-      paddingLeft: 30,
-      paddingRight: 30,
-    },
-    buttonText: {
-      color: "#fff",
-    },
-    header: {
-      fontSize: 30,
-      textAlign: "center",
-    },
-  });
 
   useEffect(() => {
     startImageRotate();
@@ -93,6 +51,25 @@ export default function Home({ navigation }) {
     });
   }, []);
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#2BD1FB",
+      alignItems: "center",
+      justifyContent: "space-around",
+    },
+    logo: {
+      width: 150,
+      height: 150,
+      transform: [{ rotate: rotation }],
+    },
+
+    header: {
+      fontSize: 30,
+      textAlign: "center",
+    },
+  });
+
   return (
     <View style={styles.container}>
       <Animated.Image
@@ -102,11 +79,29 @@ export default function Home({ navigation }) {
         }}
       />
 
-      <Text style={styles.header}>Welcome to Covid Analyzer</Text>
+      {/* <Text style={styles.header}>Welcome to Covid Analyzer</Text> */}
 
-      <TouchableOpacity style={styles.button} onPress={findCoordinates}>
-        <Text style={styles.buttonText}>Explore</Text>
-      </TouchableOpacity>
+      <FormInput
+        name="email"
+        value={""}
+        placeholder="Email"
+        autoCapitalize="none"
+        // onChangeText={}
+        iconName="ios-mail"
+        iconColor="#2C384A"
+      />
+
+      <FormInput
+        name="password"
+        value={""}
+        placeholder="Password"
+        autoCapitalize="none"
+        // onChangeText={}
+        iconName="ios-mail"
+        iconColor="#2C384A"
+      />
+
+      <FormButton onPress={handlePressed}></FormButton>
     </View>
   );
 }
