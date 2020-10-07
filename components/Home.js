@@ -59,7 +59,7 @@ export default function Home({ navigation }) {
       justifyContent: "center",
     },
     logo: {
-      marginBottom: 40,
+      marginBottom: 100,
       width: 150,
       height: 150,
       transform: [{ rotate: rotation }],
