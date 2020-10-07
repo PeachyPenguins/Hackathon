@@ -17,8 +17,6 @@ export default function Login({ navigation }) {
   // Firebase Ref to database
   const database = firebase.database().ref();
 
-  // const rotateValueHolder = new Animated.Value(0);
-
   const imageUrl = "https://i.imgur.com/19aMNlB.png";
 
   useEffect(() => {
@@ -45,10 +43,6 @@ export default function Login({ navigation }) {
       alignItems: "center",
       justifyContent: "center",
     },
-    header: {
-      fontSize: 30,
-      textAlign: "center",
-    },
   });
 
   return (
@@ -70,7 +64,7 @@ export default function Login({ navigation }) {
               onBlur={handleBlur("email")}
               value={values.email}
               placeholder="Email"
-            />
+            />  
             <FormInput
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
