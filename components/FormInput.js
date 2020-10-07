@@ -2,22 +2,8 @@ import React from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const FormInput = ({
-  placeholder,
-  value,
-}) => (
+const FormInput = ({ placeholder, value }) => (
   <View style={styles.inputContainer}>
-    {/* <Input
-      {...rest}
-      leftIcon={<Ionicons name={iconName} size={28} color={iconColor} />}
-      leftIconContainerStyle={styles.iconStyle}
-      placeholderTextColor="grey"
-      name={name}
-      value={value}
-      placeholder={placeholder}
-      style={styles.input}
-    /> */}
-
     <TextInput
       style={styles.input}
       underlineColorAndroid="transparent"
@@ -31,21 +17,20 @@ const FormInput = ({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
+    width: "80%",
+    backgroundColor: "#465881",
+    borderRadius: 25,
+    height: 50,
     marginBottom: 20,
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
   iconStyle: {
     marginRight: 10,
   },
   input: {
-    padding: 10,
+    height: 50,
+    color: "white",
   },
 });
 

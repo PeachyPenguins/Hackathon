@@ -56,9 +56,10 @@ export default function Home({ navigation }) {
       flex: 1,
       backgroundColor: "#2BD1FB",
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
     },
     logo: {
+      marginBottom: 40,
       width: 150,
       height: 150,
       transform: [{ rotate: rotation }],

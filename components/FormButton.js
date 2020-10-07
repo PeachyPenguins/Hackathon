@@ -9,12 +9,14 @@ const FormButton = ({ onPress }) => (
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: "center",
-    backgroundColor: "#282C34",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
+    width:"80%",
+    backgroundColor:"#e05e78",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10
   },
   buttonText: {
     color: "#fff",
