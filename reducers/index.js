@@ -6,6 +6,8 @@ const initialState = {
   covidData: [],
   loading: false,
   error: "",
+  orders: [],
+  currentOrder: null,
 };
 
 const initialReducer = (state = initialState, action) => {
