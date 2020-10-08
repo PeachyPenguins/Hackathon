@@ -1,18 +1,27 @@
 import React from "react";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import thunk from "redux-thunk";
-import Routes from "./components/Routes";
+import { LogBox } from "react-native";
+import _ from "lodash";
 
 // Navigation
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
 
 const Stack = createStackNavigator();
+
+LogBox.ignoreLogs(["Setting a timer"]);
+const _console = _.clone(console);
+console.warn = (message) => {
+  if (message.indexOf("Setting a timer") <= -1) {
+    _console.warn(message);
+  }
+};
 
 export default function App() {
   // Using thunk middleware for asynchronous calls
