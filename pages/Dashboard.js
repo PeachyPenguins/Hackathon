@@ -24,7 +24,7 @@ const Dashboard = (props) => {
     },
   });
 
-  console.log("REDUX STATE", state.covidData);
+  // console.log("REDUX STATE", state.covidData);
   return (
     <View style={styles.container}>
       <ScrollView>
