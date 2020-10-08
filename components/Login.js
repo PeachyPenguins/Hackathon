@@ -3,7 +3,7 @@ import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
-import { signIn } from "../firebaseAuth.js";
+import { signIn } from "../services/firebaseAuth.js";
 import FormInput from "./FormInput";
 import FormButton from "./FormButton";
 
