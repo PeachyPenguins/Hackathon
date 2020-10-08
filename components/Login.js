@@ -3,11 +3,12 @@ import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
+import { signIn } from "../firebaseAuth.js";
 import FormInput from "./FormInput";
 import FormButton from "./FormButton";
 
 // Firebase Import
-import firebase from "../firebase";
+import firebase from "../services/firebase";
 
 export default function Login({ navigation }) {
   // Redux Hooks
@@ -48,8 +49,11 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={{ email: "", password: "", }}
-        onSubmit={(values) => console.log(values)}
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => {
+          console.log(values);
+          signIn(values.email, values.password);
+        }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.form}>
@@ -64,7 +68,7 @@ export default function Login({ navigation }) {
               onBlur={handleBlur("email")}
               value={values.email}
               placeholder="Email"
-            />  
+            />
             <FormInput
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
