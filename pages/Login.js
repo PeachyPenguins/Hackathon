@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
 import { signIn } from "../services/firebaseAuth.js";
-import FormInput from "./FormInput";
-import FormButton from "./FormButton";
+import FormInput from "../components/FormInput";
+import FormButton from "../components/FormButton";
 
 // Firebase Import
 import firebase from "../services/firebase";
@@ -52,7 +52,7 @@ export default function Login({ navigation }) {
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
           console.log(values);
-          signIn(values.email, values.password);
+          signIn(values.email, values.password, navigation);
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (

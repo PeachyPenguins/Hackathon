@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
@@ -11,7 +11,7 @@ import _ from "lodash";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
 
 const Stack = createStackNavigator();
 
