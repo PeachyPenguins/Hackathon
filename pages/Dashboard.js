@@ -1,13 +1,15 @@
-import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import { StyleSheet, View, Text, FlatList, Item} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import {authorized, notAuthorized, getOrders} from '../actions'
+import firebase from '../services/firebase'
 
 const Dashboard = (props) => {
   const navigationOptions = { title: "Dashboard" };
   const { navigate } = props.navigation;
 
   const state = useSelector((state) => state.state);
+  const dispatch = useDispatch();
 
   const styles = StyleSheet.create({
     container: {
@@ -24,20 +26,31 @@ const Dashboard = (props) => {
     },
   });
 
-  // console.log("REDUX STATE", state.covidData);
+useEffect(() => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(authorized())
+    } else {
+      dispatch(notAuthorized())
+    }
+  })
+
+  dispatch(getOrders())
+},[])
+
+  console.log("REDUX STATE", state.orders);
+
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {state.covidData.length > 0
-          ? state.covidData.map((item) => (
-              <View key={item.Slug}>
-                <Text style={styles.item}>
-                  ({item.Country}) Total Deaths: {item.TotalDeaths}
-                </Text>
-              </View>
-            ))
-          : null}
-      </ScrollView>
+      <Text>Dashboard Page</Text>
+    {state.isAuthenticated ?
+      <>
+        <Text>USER AUTHENTICATED</Text>
+        <FlatList data={state.orders} renderItem ={({item}) => (
+    <Text key={item.key}>{item.name}</Text>
+  )} />
+      </>
+     : navigate('Login')}
     </View>
   );
 };

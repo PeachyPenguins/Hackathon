@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
@@ -18,19 +17,7 @@ export default function Registration({ navigation }) {
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
 
-  // Firebase Ref to database
-  const database = firebase.database().ref();
-
   const imageUrl = "https://i.imgur.com/19aMNlB.png";
-
-  useEffect(() => {
-    dispatch(getData());
-
-    // Firebase Listener on Component Mount
-    database.on("value", (snap) => {
-      console.log("FIREBASE", snap);
-    });
-  }, []);
 
   const styles = StyleSheet.create({
     container: {
