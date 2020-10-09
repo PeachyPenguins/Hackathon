@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
-import axios from "axios";
+import { StyleSheet, View, Button } from "react-native";
 import { useSelector } from "react-redux";
+import { storeData } from "../services/localStorage";
 
 const Dashboard = (props) => {
   const navigationOptions = { title: "Dashboard" };
@@ -13,8 +13,8 @@ const Dashboard = (props) => {
     container: {
       flex: 1,
       backgroundColor: "#fff",
-      paddingTop: 40,
-      paddingHorizontal: 20,
+      alignItems: "center",
+      justifyContent: "center",
     },
     item: {
       marginTop: 24,
@@ -24,10 +24,12 @@ const Dashboard = (props) => {
     },
   });
 
-  // console.log("REDUX STATE", state.covidData);
+  function signOut() {
+    storeData("false");
+  }
   return (
     <View style={styles.container}>
-      <ScrollView>
+      {/* <ScrollView>
         {state.covidData.length > 0
           ? state.covidData.map((item) => (
               <View key={item.Slug}>
@@ -37,7 +39,13 @@ const Dashboard = (props) => {
               </View>
             ))
           : null}
-      </ScrollView>
+      </ScrollView> */}
+      <Button
+        onPress={() => storeData("false")}
+        title="Sign Out"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
     </View>
   );
 };

@@ -6,6 +6,7 @@ import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import { LogBox } from "react-native";
 import _ from "lodash";
+import { retrieveData } from "./services/localStorage";
 
 // Navigation
 import "react-native-gesture-handler";
@@ -28,16 +29,40 @@ export default function App() {
   const middleware = [thunk];
   const store = createStore(rootReducer, applyMiddleware(...middleware));
 
+  var startScreen;
+  var otherScreen;
+  var isSignedIn = retrieveData();
+  //TODO: FIX THIS SO IT USES A NON-APP ASYNC FUNC
+  if (isSignedIn === "true") {
+    console.log("Going to Dashboard Page")
+    console.log(isSignedIn);
+    startScreen = <Stack.Screen name="Dashboard" component={Dashboard} />;
+    otherScreen = (
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "Welcome" }}
+      />
+    );
+  } else {
+    console.log("Going to Login Page")
+    console.log(isSignedIn);
+    startScreen = (
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "Welcome" }}
+      />
+    );
+    otherScreen = <Stack.Screen name="Dashboard" component={Dashboard} />;
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ title: "Welcome" }}
-          />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
+          {startScreen} 
+          {otherScreen}
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
