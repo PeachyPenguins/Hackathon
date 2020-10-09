@@ -3,7 +3,6 @@ import { StyleSheet, View, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
-import { signIn } from "../services/firebaseAuth.js";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import RegisterButton from "../components/RegisterButton";
@@ -11,9 +10,11 @@ import RegisterButton from "../components/RegisterButton";
 // Firebase Import
 import firebase from "../services/firebase";
 
+//empty signUp expression till its merge
+const signUp = () => {};
 
-export default function Login({ navigation }) {
-  // Redux Hooks
+export default function Registration({ navigation }) {
+    // Redux Hooks
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
 
@@ -31,15 +32,10 @@ export default function Login({ navigation }) {
     });
   }, []);
 
-  //Navigate to Registration
-  const registerButtonPressed = () => {
-    navigation.navigate("Registration", { name: "Registration" });
-  }
-
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#2BD1FB",
+      backgroundColor: "#2BD1FC",
     },
     logo: {
       marginBottom: "10%",
@@ -59,17 +55,11 @@ export default function Login({ navigation }) {
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
           console.log(values);
-          signIn(values.email, values.password, navigation);
+          signUp(values.email, values.password, navigation);
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.form}>
-            <Animated.Image
-              style={styles.logo}
-              source={{
-                uri: imageUrl,
-              }}
-            />
             <FormInput
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
@@ -82,11 +72,11 @@ export default function Login({ navigation }) {
               value={values.password}
               placeholder="Password"
             />
-            <FormButton onPress={handleSubmit} text={"Login"} />
-            <RegisterButton onPress={registerButtonPressed} />
+            <FormButton onPress={handleSubmit} text={"Sign up"} />
           </View>
         )}
       </Formik>
     </View>
   );
+
 }

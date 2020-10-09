@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "./pages/Login";
+import Registration from "./pages/Registration"
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
@@ -8,7 +9,6 @@ import { LogBox } from "react-native";
 import _ from "lodash";
 
 // Navigation
-import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Dashboard from "./pages/Dashboard";
@@ -37,6 +37,7 @@ export default function App() {
             component={Login}
             options={{ title: "Welcome" }}
           />
+          <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
         </Stack.Navigator>
       </NavigationContainer>
