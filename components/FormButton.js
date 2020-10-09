@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const FormButton = ({ onPress }) => (
+const FormButton = ({ onPress, text }) => (
   <TouchableOpacity style={styles.button} onPress={onPress}>
-    <Text style={styles.buttonText}>Login</Text>
+    <Text style={styles.buttonText}>{text}</Text>
   </TouchableOpacity>
 );
 
