@@ -6,12 +6,12 @@ import { Formik } from "formik";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import RegisterButton from "../components/RegisterButton";
+import { signUp } from "../services/firebaseAuth"
 
 // Firebase Import
 import firebase from "../services/firebase";
 
 //empty signUp expression till its merge
-const signUp = () => {};
 
 export default function Registration({ navigation }) {
     // Redux Hooks
