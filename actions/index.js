@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./types";
 import firebase from "../services/firebase";
-const db = firebase.database().ref();
+const db = firebase.database();
 
 export const setLocation = (location) => (dispatch) => {
   dispatch({ type: actionTypes.SET_LOCATION, payload: location });
@@ -29,7 +29,7 @@ export const getData = (state) => (dispatch) => {
 export const getOrders = () => (dispatch) => {
   db.ref("/orders").on("value", (snap) => {
     let data = snap.val() ? snap.val() : {};
-    let orders = { ...data };
+    let orders = Object.values(data);
     dispatch({ type: actionTypes.GET_ORDERS, payload: orders });
   });
 };
@@ -53,3 +53,11 @@ export const clearOrders = () => (dispatch) => {
   dispatch({ type: actionTypes.CLEAR_ORDERS });
   db.ref("/orders").remove();
 };
+
+export const authorized = () => (dispatch) => {
+dispatch({type: actionTypes.AUTHORIZED});
+}
+
+export const notAuthorized = () => (dispatch) => {
+dispatch({type: actionTypes.NOT_AUTHORIZED});
+}
