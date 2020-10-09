@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Animated } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setLocation, getData } from "../actions";
 import { Formik } from "formik";
@@ -64,11 +64,9 @@ export default function Login({ navigation }) {
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.form}>
-            <Animated.Image
+            <Image
               style={styles.logo}
-              source={{
-                uri: imageUrl,
-              }}
+              source={require("../assets/logo_darkblue.png")}
             />
             <FormInput
               onChangeText={handleChange("email")}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./types";
-import firebase from "../firebase";
+import firebase from "../services/firebase";
 const db = firebase.database().ref();
 
 export const setLocation = (location) => (dispatch) => {
