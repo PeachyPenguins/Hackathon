@@ -8,6 +8,7 @@ const initialState = {
   error: "",
   orders: [],
   currentOrder: null,
+  done: false,
 };
 
 const initialReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const initialReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case actionTypes.GET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload,
       };
     default:
       return state;

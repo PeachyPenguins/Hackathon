@@ -1,5 +1,7 @@
 import axios from "axios";
 import * as actionTypes from "./types";
+import firebase from "../firebase";
+const db = firebase.database().ref();
 
 export const setLocation = (location) => (dispatch) => {
   dispatch({ type: actionTypes.SET_LOCATION, payload: location });
@@ -22,4 +24,32 @@ export const getData = (state) => (dispatch) => {
         payload: err.message,
       });
     });
+};
+
+export const getOrders = () => (dispatch) => {
+  db.ref("/orders").on("value", (snap) => {
+    let data = snap.val() ? snap.val() : {};
+    let orders = { ...data };
+    dispatch({ type: actionTypes.GET_ORDERS, payload: orders });
+  });
+};
+
+export const addOrders = (order) => (dispatch) => {
+  dispatch({ type: actionTypes.ADD_ORDERS });
+  db.ref("/orders").push(order);
+};
+
+export const updateOrders = (order) => (dispatch) => {
+  dispatch({ type: actionTypes.UPDATE_ORDERS });
+  db.ref("/orders").update({
+    [id]: {
+      order: order.name,
+      done: !doneState,
+    },
+  });
+};
+
+export const clearOrders = () => (dispatch) => {
+  dispatch({ type: actionTypes.CLEAR_ORDERS });
+  db.ref("/orders").remove();
 };
