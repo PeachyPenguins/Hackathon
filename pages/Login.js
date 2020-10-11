@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, KeyboardAvoidingView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import { signIn } from "../services/firebaseAuth.js";
@@ -9,7 +9,6 @@ import RegisterButton from "../components/RegisterButton";
 
 // Firebase Import
 import firebase from "../services/firebase";
-
 
 export default function Login({ navigation }) {
   // Redux Hooks
@@ -21,7 +20,7 @@ export default function Login({ navigation }) {
   //Navigate to Registration
   const registerButtonPressed = () => {
     navigation.navigate("Registration", { name: "Registration" });
-  }
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -29,7 +28,7 @@ export default function Login({ navigation }) {
       backgroundColor: "#2BD1FB",
     },
     logo: {
-      marginBottom: "10%",
+      marginBottom: "5%",
       marginTop: "10%",
       width: 150,
       height: 150,
@@ -41,7 +40,7 @@ export default function Login({ navigation }) {
   });
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="height">
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
@@ -72,6 +71,6 @@ export default function Login({ navigation }) {
           </View>
         )}
       </Formik>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
