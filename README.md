@@ -1,4 +1,3 @@
-# ![WorkOrders](https://i.imgur.com/FaCik7Q.jpg)
 # WorkOrders
 <table>
 <tr>
@@ -12,14 +11,13 @@
 ## Site
 
 ### Login
-![](https://i.imgur.com/yvuO5kE.jpg)
+<img src="https://i.imgur.com/yvuO5kE.jpg" width="225" height="450" />
 
 ### Registration
-![](https://i.imgur.com/SMWDEyE.jpg)
+<img src="https://i.imgur.com/SMWDEyE.jpg" width="225" height="450" />
 
 ### Dashboard
-![](https://i.imgur.com/mpcICk6.jpg)
-
+<img src="https://i.imgur.com/mpcICk6.jpg" width="225" height="450" />
 
 ## [Usage](https://github.com/PeachyPenguins/Hackathon/) 
 
@@ -43,10 +41,14 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 - Create tabs within dashboard to display user data
 
 ## Team
+### Isaiah Francois
+<img src="https://avatars3.githubusercontent.com/u/42652624?s=460&u=67ee8021c518676f3ec3e99d8c12906b36842365&v=4" width="200" height="200" />
 
-![Isaiah Francois](https://avatars3.githubusercontent.com/u/42652624?s=460&u=67ee8021c518676f3ec3e99d8c12906b36842365&v=4)
-![Samuel Obe](https://avatars0.githubusercontent.com/u/48385238?s=400&u=f0270c2141c9d4eaf61a688d354c843063af81df&v=4)
-![Ahad Islam](https://avatars1.githubusercontent.com/u/34593133?s=400&v=4)
+### Samuel Obe
+<img src="https://avatars0.githubusercontent.com/u/48385238?s=400&u=f0270c2141c9d4eaf61a688d354c843063af81df&v=4" width="200" height="200" />
+
+### Ahad Islam
+<img src="https://avatars1.githubusercontent.com/u/34593133?s=400&v=4" width="200" height="200" />
 
 
 
