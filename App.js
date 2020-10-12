@@ -1,8 +1,9 @@
 import React from "react";
 import Login from "./pages/Login";
-import Registration from "./pages/Registration"
+import Registration from "./pages/Registration";
 import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
+import { Provider as StoreProvider } from "react-redux";
+import { Provider as PaperProvider } from "react-native-paper";
 import rootReducer from "./reducers";
 import thunk from "redux-thunk";
 import { LogBox } from "react-native";
@@ -29,18 +30,24 @@ export default function App() {
   const store = createStore(rootReducer, applyMiddleware(...middleware));
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ title: "Welcome" }}
-          />
-          <Stack.Screen name="Registration" component={Registration} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ title: "Welcome" }}
+            />
+            <Stack.Screen name="Registration" component={Registration} />
+            <Stack.Screen
+              name="Dashboard"
+              component={Dashboard}
+              options={{ headerLeft: null }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </StoreProvider>
   );
 }

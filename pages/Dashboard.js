@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text, FlatList, Item } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import ActionButton from "react-native-action-button";
-import Icon from "react-native-vector-icons/Ionicons";
+import DashboardTile from "../components/DashboardTile";
 import { useSelector, useDispatch } from "react-redux";
 import { authorized, notAuthorized, getOrders } from "../actions";
 import firebase from "../services/firebase";
 
 const Dashboard = (props) => {
-  const navigationOptions = { title: "Dashboard" };
-  const { navigate } = props.navigation;
-
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
 
@@ -17,20 +14,14 @@ const Dashboard = (props) => {
     container: {
       flex: 1,
       backgroundColor: "#fff",
-      paddingTop: 40,
-      paddingHorizontal: 20,
-    },
-    item: {
-      marginTop: 24,
-      padding: 10,
-      backgroundColor: "pink",
-      fontSize: 16,
+      paddingHorizontal: 10,
+      backgroundColor: "#2BD1FB",
     },
     actionButtonIcon: {
       fontSize: 20,
       height: 22,
       color: "#e84c4c",
-      alignItems: "center"
+      alignItems: "center",
     },
   });
 
@@ -50,27 +41,17 @@ const Dashboard = (props) => {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Dashboard Page</Text> */}
+      <FlatList
+        data={state.orders}
+        renderItem={({ item }) => <DashboardTile item={item} />}
+        keyExtractor={(item, index) => index.toString()}
+      />
       <ActionButton
-        buttonColor={styles.actionButtonIcon.color}
+        buttonColor="#e84c4c"
         onPress={() => {
           console.log("hi");
         }}
-
       />
-      {/* {state.isAuthenticated ? (
-        <>
-          <Text>USER AUTHENTICATED</Text>
-          <FlatList
-            data={state.orders}
-            renderItem={({ item }) => (
-              <Text >{item.name.toString()}</Text>
-            )}
-          />
-        </>
-      ) : (
-        navigate("Login")
-      )} */}
     </View>
   );
 };
