@@ -44,8 +44,6 @@ const Dashboard = (props) => {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Dashboard Page</Text> */}
-
       <FlatList
         data={state.orders}
         renderItem={({ item }) => <DashboardTile item={item} />}

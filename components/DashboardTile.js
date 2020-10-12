@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Card } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,9 +22,6 @@ const styles = StyleSheet.create({
   },
   cardText: {
     color: "white",
-  },
-  icon: {
-    color: "green",
   },
 });
 
