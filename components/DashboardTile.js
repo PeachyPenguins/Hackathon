@@ -1,44 +1,42 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Avatar, Card } from "react-native-paper";
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingHorizontal: 5,
+  },
   card: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    backgroundColor: "#0c3c64",
 
     elevation: 5,
   },
-  buttonText: {
-    color: "black",
+  cardText: {
+    color: "white",
+  },
+  icon: {
+    color: "green",
   },
 });
-
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const DashboardTile = ({ item }) => (
   <View style={styles.container}>
     <Card style={styles.card}>
       <Card.Title
         title={item.name}
-        subtitle={"Card Subtitle"}
-        // left={LeftContent}
+        subtitle={item.done == true ? "Complete" : "Incomplete"}
+        titleStyle={styles.cardText}
+        subtitleStyle={styles.cardText}
       />
-      {/* <Card.Content>
-        <Title>Card title</Title>
-        <Paragraph>Card content</Paragraph>
-      </Card.Content>
-      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-      <Card.Actions>
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Card.Actions> */}
     </Card>
   </View>
 );
