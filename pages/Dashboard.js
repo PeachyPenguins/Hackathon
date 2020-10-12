@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View,  FlatList, } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import ActionButton from "react-native-action-button";
 import DashboardTile from "../components/DashboardTile";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,7 +26,6 @@ const Dashboard = (props) => {
       height: 22,
       color: "#e84c4c",
       alignItems: "center",
-      position: 'absolute',
     },
   });
 
@@ -47,31 +46,18 @@ const Dashboard = (props) => {
   return (
     <View style={styles.container}>
       {/* <Text>Dashboard Page</Text> */}
-      <ActionButton
-        buttonColor={styles.actionButtonIcon.color}
-        onPress={() => {
-          console.log("hi");
-        }}
-      />
 
       <FlatList
         data={state.orders}
         renderItem={({ item }) => <DashboardTile item={item} />}
         keyExtractor={(item, index) => index.toString()}
       />
-
-      {/* {state.isAuthenticated ? 
-        <>
-          <Text>USER AUTHENTICATED</Text>
-          <FlatList
-        data={state.orders}
-        renderItem={({ item }) => <Text>{item.name} </Text>}
-        keyExtractor={(item, index) => index.toString()}
+      <ActionButton
+        buttonColor="#e84c4c"
+        onPress={() => {
+          console.log("hi");
+        }}
       />
-        </>
-       : 
-        navigate("Login")
-      } */}
     </View>
   );
 };
