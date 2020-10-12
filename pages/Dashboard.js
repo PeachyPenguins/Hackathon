@@ -17,7 +17,6 @@ const Dashboard = (props) => {
     container: {
       flex: 1,
       backgroundColor: "#fff",
-      paddingTop: 40,
       paddingHorizontal: 10,
       backgroundColor: "#2BD1FB",
     },
