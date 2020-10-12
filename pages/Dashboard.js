@@ -7,9 +7,6 @@ import { authorized, notAuthorized, getOrders } from "../actions";
 import firebase from "../services/firebase";
 
 const Dashboard = (props) => {
-  const navigationOptions = { title: "Dashboard" };
-  const { navigate } = props.navigation;
-
   const state = useSelector((state) => state.state);
   const dispatch = useDispatch();
 

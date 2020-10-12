@@ -40,7 +40,11 @@ export default function App() {
               options={{ title: "Welcome" }}
             />
             <Stack.Screen name="Registration" component={Registration} />
-            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen
+              name="Dashboard"
+              component={Dashboard}
+              options={{ headerLeft: null }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
